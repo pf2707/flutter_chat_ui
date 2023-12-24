@@ -129,5 +129,17 @@
     "status": "seen",
     "text": "Guys! Did you know Imagine Dragons became ambassadors for u24.gov.ua ?",
     "type": "text"
+  },
+  {
+    "author": {
+      "firstName": "Thai",
+      "id": "4c2307ba-3d40-442f-b1ff-b271f63904ca",
+      "lastName": "Tran"
+    },
+    "createdAt": 1655624990000,
+    "id": "propose_a_trade",
+    "status": "seen",
+    "text": "Guys! Did you know Imagine Dragons became ambassadors for u24.gov.ua ?",
+    "type": "custom"
   }
 ]

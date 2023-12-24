@@ -480,7 +480,7 @@ class ChatState extends State<Chat> {
                 : (
                   // Thai tran. Allow full width for custom message .
                   (widget.forceFullWidthForCustomMessageInCaseNoShowAvatar ?
-                  min(constraints.maxWidth * 1, minWidth).floor() :
+                  (constraints.maxWidth * 0.9).floor() :
                   min(constraints.maxWidth * 0.78, minWidth).floor())
                 );
         final Widget msgWidget = Message(

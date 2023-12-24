@@ -222,6 +222,32 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
+
+  _customMessageRender(types.CustomMessage message, {required int messageWidth}) {
+    if (message.id == 'propose_a_trade') {
+      return Center(
+        child: Container(
+          height: 56, width: messageWidth.toDouble(),
+          decoration: const BoxDecoration(
+              color: Colors.purpleAccent,
+              borderRadius: BorderRadius.all(Radius.circular(20))
+          ),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Propose a Trade',
+              )
+            ],
+          ),
+        ),
+      );
+    }
+
+    return const SizedBox();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Chat(
@@ -230,10 +256,11 @@ class _ChatPageState extends State<ChatPage> {
           onMessageTap: _handleMessageTap,
           onPreviewDataFetched: _handlePreviewDataFetched,
           onSendPressed: _handleSendPressed,
-          showUserAvatars: true,
+          showUserAvatars: false,
           showUserNames: true,
           user: _user,
           isLeftStatus: true,
+          customMessageBuilder: (customMessage, {required int messageWidth}) => _customMessageRender(customMessage, messageWidth: messageWidth),
           theme: const DefaultChatTheme(
             seenIcon: Text(
               'read',
