@@ -30,6 +30,7 @@ class Message extends StatelessWidget {
     required this.emojiEnlargementBehavior,
     this.fileMessageBuilder,
     required this.hideBackgroundOnEmojiMessages,
+    required this.hideBackgroundOnCustomMessages,
     this.imageHeaders,
     this.imageMessageBuilder,
     this.imageProviderBuilder,
@@ -99,6 +100,9 @@ class Message extends StatelessWidget {
 
   /// Hide background for messages containing only emojis.
   final bool hideBackgroundOnEmojiMessages;
+
+  /// Hide background for custom messages.
+  final bool hideBackgroundOnCustomMessages;
 
   /// See [Chat.imageHeaders].
   final Map<String, String>? imageHeaders;
@@ -212,21 +216,25 @@ class Message extends StatelessWidget {
               message: message,
               nextMessageInGroup: roundBorder,
             )
-          : enlargeEmojis && hideBackgroundOnEmojiMessages
-              ? _messageBuilder()
-              : Container(
-                  decoration: BoxDecoration(
-                    borderRadius: borderRadius,
-                    color: !currentUserIsAuthor ||
-                            message.type == types.MessageType.image
-                        ? InheritedChatTheme.of(context).theme.secondaryColor
-                        : InheritedChatTheme.of(context).theme.primaryColor,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: borderRadius,
-                    child: _messageBuilder(),
-                  ),
-                );
+          : (message.type == types.MessageType.custom && hideBackgroundOnCustomMessages) ?
+              _messageBuilder() :
+              (
+                  enlargeEmojis && hideBackgroundOnEmojiMessages
+                      ? _messageBuilder()
+                      : Container(
+                    decoration: BoxDecoration(
+                      borderRadius: borderRadius,
+                      color: !currentUserIsAuthor ||
+                          message.type == types.MessageType.image
+                          ? InheritedChatTheme.of(context).theme.secondaryColor
+                          : InheritedChatTheme.of(context).theme.primaryColor,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: borderRadius,
+                      child: _messageBuilder(),
+                    ),
+                  )
+              );
 
   Widget _messageBuilder() {
     switch (message.type) {

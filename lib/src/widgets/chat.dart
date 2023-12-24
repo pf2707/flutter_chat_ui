@@ -56,6 +56,7 @@ class Chat extends StatefulWidget {
     this.fileMessageBuilder,
     this.groupMessagesThreshold = 60000,
     this.hideBackgroundOnEmojiMessages = true,
+    this.hideBackgroundOnCustomMessages = true,
     this.imageGalleryOptions = const ImageGalleryOptions(
       maxScale: PhotoViewComputedScale.covered,
       minScale: PhotoViewComputedScale.contained,
@@ -177,6 +178,9 @@ class Chat extends StatefulWidget {
 
   /// See [Message.hideBackgroundOnEmojiMessages].
   final bool hideBackgroundOnEmojiMessages;
+
+  /// See [Message.hideBackgroundOnCustomMessages].
+  final bool hideBackgroundOnCustomMessages;
 
   /// See [ImageGallery.options].
   final ImageGalleryOptions imageGalleryOptions;
@@ -480,6 +484,7 @@ class ChatState extends State<Chat> {
           emojiEnlargementBehavior: widget.emojiEnlargementBehavior,
           fileMessageBuilder: widget.fileMessageBuilder,
           hideBackgroundOnEmojiMessages: widget.hideBackgroundOnEmojiMessages,
+          hideBackgroundOnCustomMessages: widget.hideBackgroundOnCustomMessages,
           imageHeaders: widget.imageHeaders,
           imageMessageBuilder: widget.imageMessageBuilder,
           imageProviderBuilder: widget.imageProviderBuilder,
