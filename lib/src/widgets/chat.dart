@@ -57,6 +57,7 @@ class Chat extends StatefulWidget {
     this.groupMessagesThreshold = 60000,
     this.hideBackgroundOnEmojiMessages = true,
     this.hideBackgroundOnCustomMessages = true,
+    this.forceFullWidthForCustomMessageInCaseNoShowAvatar = true,
     this.imageGalleryOptions = const ImageGalleryOptions(
       maxScale: PhotoViewComputedScale.covered,
       minScale: PhotoViewComputedScale.contained,
@@ -181,6 +182,9 @@ class Chat extends StatefulWidget {
 
   /// See [Message.hideBackgroundOnCustomMessages].
   final bool hideBackgroundOnCustomMessages;
+
+  /// Allow full width for custom messages in case not show avatar.
+  final bool forceFullWidthForCustomMessageInCaseNoShowAvatar;
 
   /// See [ImageGallery.options].
   final ImageGalleryOptions imageGalleryOptions;
@@ -473,7 +477,12 @@ class ChatState extends State<Chat> {
         final messageWidth =
             widget.showUserAvatars && message.author.id != widget.user.id
                 ? min(constraints.maxWidth * 0.72, minWidth).floor()
-                : min(constraints.maxWidth * 0.78, minWidth).floor();
+                : (
+                  // Thai tran. Allow full width for custom message .
+                  (widget.forceFullWidthForCustomMessageInCaseNoShowAvatar ?
+                  min(constraints.maxWidth * 1, minWidth).floor() :
+                  min(constraints.maxWidth * 0.78, minWidth).floor())
+                );
         final Widget msgWidget = Message(
           audioMessageBuilder: widget.audioMessageBuilder,
           avatarBuilder: widget.avatarBuilder,
