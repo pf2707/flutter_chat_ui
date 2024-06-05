@@ -146,21 +146,21 @@ class _InputState extends State<Input> {
       autofocus: !widget.options.autofocus,
       child: Padding(
         padding: InheritedChatTheme.of(context).theme.inputMargin,
-        child: Material(
-          borderRadius: InheritedChatTheme.of(context).theme.inputBorderRadius,
-          color: InheritedChatTheme.of(context).theme.inputBackgroundColor,
-          surfaceTintColor:
+        child: Column(
+          children: [
+            if (widget.options.stickyWidgetAboveInput != null)...[
+              widget.options.stickyWidgetAboveInput!,
+
+              const SizedBox(height: 10,),
+            ],
+
+            Material(
+              borderRadius: InheritedChatTheme.of(context).theme.inputBorderRadius,
+              color: InheritedChatTheme.of(context).theme.inputBackgroundColor,
+              surfaceTintColor:
               InheritedChatTheme.of(context).theme.inputSurfaceTintColor,
-          elevation: InheritedChatTheme.of(context).theme.inputElevation,
-          child: Column(
-            children: [
-              if (widget.options.stickyWidgetAboveInput != null)...[
-                widget.options.stickyWidgetAboveInput!,
-
-                const SizedBox(height: 10,),
-              ],
-
-              Container(
+              elevation: InheritedChatTheme.of(context).theme.inputElevation,
+              child: Container(
                 decoration:
                 InheritedChatTheme.of(context).theme.inputContainerDecoration,
                 padding: safeAreaInsets,
@@ -234,8 +234,8 @@ class _InputState extends State<Input> {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
