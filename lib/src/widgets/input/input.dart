@@ -152,18 +152,19 @@ class _InputState extends State<Input> {
           surfaceTintColor:
               InheritedChatTheme.of(context).theme.inputSurfaceTintColor,
           elevation: InheritedChatTheme.of(context).theme.inputElevation,
-          child: Container(
-            decoration:
+          child: Column(
+            children: [
+              if (widget.options.stickyWidgetAboveInput != null)...[
+                widget.options.stickyWidgetAboveInput!,
+
+                const SizedBox(height: 10,),
+              ],
+
+              Container(
+                decoration:
                 InheritedChatTheme.of(context).theme.inputContainerDecoration,
-            padding: safeAreaInsets,
-            child: Column(
-              children: [
-                if (widget.options.stickyWidgetAboveInput != null)
-                  widget.options.stickyWidgetAboveInput!,
-
-                const SizedBox(height: 6,),
-
-                Row(
+                padding: safeAreaInsets,
+                child: Row(
                   textDirection: TextDirection.ltr,
                   children: [
                     if (widget.onAttachmentPressed != null)
@@ -232,8 +233,8 @@ class _InputState extends State<Input> {
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
